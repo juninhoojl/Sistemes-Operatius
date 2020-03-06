@@ -1,0 +1,11 @@
+#Arquivos finder macOS
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+#Arquivos bin
+*.bin
+._*.bin
+**/*.bin
+**/._*.bin

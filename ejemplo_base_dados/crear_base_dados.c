@@ -1,3 +1,4 @@
+//Programa en C para crear una base de datos
 #include <mysql.h>
 #include <string.h>
 #include <stdlib.h>
@@ -5,8 +6,11 @@
 
 int main(int argc, char **argv){
 
+	//Conector para acceder al servidor de bases de datos
 	MYSQL *conn;
 	int err;
+	//Creamos una conexion al servidor MYSQL
+
 
 	conn=mysql_init(NULL);
 
@@ -16,6 +20,9 @@ int main(int argc, char **argv){
 		exit (1);
 
 	}
+
+	//inicializar la conexion, indicando nuestras claves de acceso 
+	// al servidor de bases de datos (user,pass)
 
 	conn=mysql_real_connect(conn,"localhost","root","mysql",NULL,0,NULL,0);
 

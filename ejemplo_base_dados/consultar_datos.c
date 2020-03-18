@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Consultar dados
+
 int main(int argc, char **argv){
 
 	MYSQL *conn;

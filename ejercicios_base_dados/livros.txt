@@ -1,0 +1,11 @@
+1 Dom_Quixote Miguel 10.20
+2 O_Hobbit Tolkien 8.00
+3 O_Senhor_dos_Aneis Tolkien 10.30
+4 HP_Pedra_Filosofal Rowling 9.50
+5 HP_Camara_Secreta Rowling 10.50
+6 O_Alquimista Paulo_Coelho 8.50
+7 O_Silmarillion Tolkien 10.20
+8 Hamlet Shakespeare 7.50
+9 Othello Shakespeare 9.70
+10 Capitaes_da_Areia Jorge 11.00
+

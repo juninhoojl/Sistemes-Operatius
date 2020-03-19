@@ -15,7 +15,8 @@
 #define GAMEFILE "games.txt"
 #define QTDMAX 4
 #define QTDMIN 2
-#define TAMUSERNAME 25
+#define CHARSNOME 25
+#define TAMUSERNAME CHARSNOME+1
 
 // Arquivo /media/psf/Home/Documents/Sistemes-Operatius/ficheros_sql
 
@@ -27,19 +28,21 @@
 // Encerra partida
 
 // Funcao para inserir os jogadores
-int insere_Player(char *nome_arq[], MYSQL *conn);
+int insere_Player(char nome_arq[], MYSQL *conn);
 
 //
-unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd);
+unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd);
 // Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 
 
 int main(int argc, char **argv){
 	
 	
-	char players[QTDMAX][TAMUSERNAME+1] = {"jose", "juninhoojl", "luiz"};
+	char players[QTDMAX][TAMUSERNAME] = {"jose", "juninhoojl", "luiz"};
 	
 	int qtdp = 3;
+	
+	int i=0;
 	
 	unsigned int id_jogo=0;
 	// Ler lista de pessoas para um mesmo jogo
@@ -71,17 +74,22 @@ int main(int argc, char **argv){
 	}
 	
 	
-	
+	for(i=0;i<qtdp;i++){
+		printf("Player %d = %s\n",i,players[i]);
+	}
 	
 	
 	//insere_Player(PLAYERFILE, conn);
 	
 	//insere_Player(PLAYERFILE, conn);
+	qtdp=3;
 	
-	//id_jogo=cria_Game(conn, players, qtdp);
+	id_jogo=cria_Game(conn, players, qtdp);
 	printf("IdJogo = %u\n",id_jogo); 
 	
-
+	for(i=0;i<qtdp;i++){
+		printf("Player %d = %s\n",i,players[i]);
+	}
 	
 	// Agora ja relaciona jogadores da lista usando id do game
 	mysql_close (conn);
@@ -94,7 +102,7 @@ int main(int argc, char **argv){
 /*	INSERT INTO Player (Username, Password) VALUES ('Jose', '1qaz2wsx');*/
 /*	INSERT INTO Player (Username, Password) VALUES ('Luiz', '2wsx3edc');*/
 // Retorna ID do Game
-int insere_Player(char *nome_arq[], MYSQL *conn){
+int insere_Player(char nome_arq[], MYSQL *conn){
 	
 	FILE *arq;
 	int err;
@@ -154,7 +162,7 @@ int insere_Player(char *nome_arq[], MYSQL *conn){
 }
 	
 // Recebe pessoas que vao entrar em um jogo
-unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd){
+unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 	
 	//FILE *arq;
 	int err,i=0;
@@ -197,6 +205,16 @@ unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd){
 	printf("id_game = %u\n",id_game); 
 	
 	
+	
+	for(i=0;i<qtd;i++){
+		
+		printf("Player %d = %s\n",i,players[i]);
+		
+	}
+	
+	
+	/*
+	
 	for(i=0;i<qtd;i++){
 		
 		//INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
@@ -228,7 +246,7 @@ unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd){
 	
 	
 	
-	
+	*/
 	
 
 	return id_game;

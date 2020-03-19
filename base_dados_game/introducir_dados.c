@@ -13,6 +13,9 @@
 #define BASE "GameSO"
 #define PLAYERFILE "players.txt"
 #define GAMEFILE "games.txt"
+#define QTDMAX 4
+#define QTDMIN 2
+#define TAMUSERNAME 25
 
 // Arquivo /media/psf/Home/Documents/Sistemes-Operatius/ficheros_sql
 
@@ -27,31 +30,27 @@
 int insere_Player(char *nome_arq[], MYSQL *conn);
 
 //
-int insere_Player(char *nome_arq[], MYSQL *conn);
-
+cria_Game(MYSQL *conn, char *players[], int qtd);
 // Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 
 
 int main(int argc, char **argv){
 	
+	
+	char players[QTDMAX][TAMUSERNAME+1] = {"jose", "juninhoojl", "luiz"};
+	
+	
+	
+	int qtdp = 3; 
+	// Ler lista de pessoas para um mesmo jogo
+	// Cria jogo
+	// Pega o id e adiciona na lista
+	
 	MYSQL *conn;
 	int err;
-
 	
-
 	conn=mysql_init(NULL);
-	
-	//char filename[40];
 
-	// Inserir jogadores
-	// Senha 25
-	// Username 25
-	
-	
-
-	/*	INSERT INTO Player (Username, Password) VALUES ('Jose', '1qaz2wsx');*/
-	/*	INSERT INTO Player (Username, Password) VALUES ('Luiz', '2wsx3edc');*/
-	
 	/*	INSERT INTO Game (Duracion,Vencedor) VALUES (33,1);*/
 	/*	INSERT INTO Game (Duracion,Vencedor) VALUES (30,2);*/
 	
@@ -71,70 +70,24 @@ int main(int argc, char **argv){
 		exit (1);
 	}
 	
-
 	
-	insere_Player(PLAYERFILE, conn);
+	//insere_Player(PLAYERFILE, conn);
+	
+	//insere_Player(PLAYERFILE, conn);
+	
+	cria_Game(conn, players, qtdp);
 	
 	
 	mysql_close (conn);
-	
-	
-	exit(0);
-	
-/*	arq=fopen(GAMEFILE, "r");*/
-	
-/*	if (arq==NULL){*/
-/*		perror("Error");*/
-/*		return 1;*/
-/*	}else{ */
-		
-/*		if (arq==NULL){*/
-/*			perror("Error");*/
-/*			return 1;*/
-/*		}else{*/
-			
-/*			while(!feof(arq)) {*/
-				
-/*				err=fscanf(arq,"%s %s", &username[0], &senha[0]);*/
-				
-/*				if(err!=2){*/
-					
-					// Caso esteja na ultima linha, para nao repetir
-/*					if(err<0){*/
-/*						exit(1);*/
-/*					}*/
-/*					printf("Erro ao introduzir dados\n");*/
-/*					printf("%d",err); */
-					
-/*				}*/
-/*				strcpy (query, "INSERT INTO Player (Username, Password) VALUES ('");*/
-/*				strcat (query, username);*/
-/*				strcat (query, "','");*/
-/*				strcat (query, senha); */
-/*				strcat (query, "'");*/
-/*				strcat (query, ");");*/
-/*				printf("query = %s\n", query);*/
-/*				err = mysql_query(conn, query);*/
-				
-/*				if (err!=0){*/
-/*					printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));*/
-/*					exit (1); */
-/*				}*/
-/*			}*/
-/*		}*/
-/*	}*/
-/*	fclose(arq);*/
-	
 	
 	
 	exit(0); 
 }
 
 	
-	
-	
-	
-	
+/*	INSERT INTO Player (Username, Password) VALUES ('Jose', '1qaz2wsx');*/
+/*	INSERT INTO Player (Username, Password) VALUES ('Luiz', '2wsx3edc');*/
+// Retorna ID do Game
 int insere_Player(char *nome_arq[], MYSQL *conn){
 	
 	FILE *arq;
@@ -194,6 +147,63 @@ int insere_Player(char *nome_arq[], MYSQL *conn){
 	return 0;
 }
 	
+// Recebe pessoas que vao entrar em um jogo
+int cria_Game(MYSQL *conn, char *players[], int qtd){
+	
+	//FILE *arq;
+	int err,i=0;
+	//char username[25];
+	//char senha[25];
+	char query[80];
+	
+	
+	
+	//  Cria jogo e pega o ultimo id
+	
+	// INSERT INTO Game () VALUES ();
+	// LAST_INSERT_ID();
+
+	
+	/*
+	for(i=0,i<qtd,i++){
+		
+		err=fscanf(arq,"%s %s", &username[0], &senha[0]);
+		
+		if(err!=2){
+			
+			// Caso esteja na ultima linha, para nao repetir
+			if(err<0){
+				return 1;
+			}
+			printf("Erro ao introduzir dados\n");
+			printf("%d",err); 
+			
+		}
+		
+		// INSERT INTO Game () VALUES ();
+		
+		strcpy (query, "INSERT INTO Player (Username, Password) VALUES ('");
+		strcat (query, username);
+		strcat (query, "','");
+		strcat (query, senha); 
+		strcat (query, "'");
+		strcat (query, ");");
+		printf("query = %s\n", query);
+		err = mysql_query(conn, query);
+		
+		if (err!=0){
+			printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+			return 1;
+		}
+		
+		
+	}
+	
+	*/
+
+	
+	return 0;
+}
 	
 	
 	

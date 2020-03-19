@@ -30,7 +30,7 @@
 int insere_Player(char *nome_arq[], MYSQL *conn);
 
 //
-unsigned int cria_Game(MYSQL *conn, char *players[], int qtd);
+unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd);
 // Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 
 
@@ -39,9 +39,9 @@ int main(int argc, char **argv){
 	
 	char players[QTDMAX][TAMUSERNAME+1] = {"jose", "juninhoojl", "luiz"};
 	
-	unsigned int id_jogo=0;
+	int qtdp = 3;
 	
-	int qtdp = 3; 
+	unsigned int id_jogo=0;
 	// Ler lista de pessoas para um mesmo jogo
 	// Cria jogo
 	// Pega o id e adiciona na lista
@@ -71,14 +71,19 @@ int main(int argc, char **argv){
 	}
 	
 	
-	//insere_Player(PLAYERFILE, conn);
+	
+	
 	
 	//insere_Player(PLAYERFILE, conn);
 	
-	id_jogo=cria_Game(conn, players, qtdp);
+	//insere_Player(PLAYERFILE, conn);
+	
+	//id_jogo=cria_Game(conn, players, qtdp);
 	printf("IdJogo = %u\n",id_jogo); 
 	
+
 	
+	// Agora ja relaciona jogadores da lista usando id do game
 	mysql_close (conn);
 	
 	
@@ -149,7 +154,7 @@ int insere_Player(char *nome_arq[], MYSQL *conn){
 }
 	
 // Recebe pessoas que vao entrar em um jogo
-unsigned int cria_Game(MYSQL *conn, char *players[], int qtd){
+unsigned int cria_Game(MYSQL *conn, char *players[][QTDMAX], int qtd){
 	
 	//FILE *arq;
 	int err,i=0;
@@ -157,7 +162,7 @@ unsigned int cria_Game(MYSQL *conn, char *players[], int qtd){
 	//char username[25];
 	//char senha[25];
 	char query[80];
-	
+	char id_games[10];
 	MYSQL_RES *resultado;
 	MYSQL_ROW row;
 	
@@ -191,47 +196,45 @@ unsigned int cria_Game(MYSQL *conn, char *players[], int qtd){
 	
 	printf("id_game = %u\n",id_game); 
 	
-	/*
-
-	for(i=0,i<qtd,i++){
+	
+	for(i=0;i<qtd;i++){
 		
-		err=fscanf(arq,"%s %s", &username[0], &senha[0]);
+		//INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
 		
-		if(err!=2){
-			
-			// Caso esteja na ultima linha, para nao repetir
-			if(err<0){
-				return 1;
-			}
-			printf("Erro ao introduzir dados\n");
-			printf("%d",err); 
-			
-		}
+		printf("id_game = %u\n",id_game);
 		
-		// INSERT INTO Game () VALUES ();
-		
-		strcpy (query, "INSERT INTO Player (Username, Password) VALUES ('");
-		strcat (query, username);
+		strcpy (query, "INSERT INTO Relaciona (Game,Player) VALUES ('");
+		sprintf(id_games, "%u", id_game);
+		strcat (query, id_games);
 		strcat (query, "','");
-		strcat (query, senha); 
-		strcat (query, "'");
+		strcat (query, players[i]);
+		strcat (query, "','");
 		strcat (query, ");");
 		printf("query = %s\n", query);
 		err = mysql_query(conn, query);
 		
+		// Nao precisa esvaziar string pq tem o fim da linha e comeca no 0
 		if (err!=0){
 			printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
-			return 1;
+			exit (1); 
 		}
 		
 		
+		
+		
+		//INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
+		
 	}
 	
-	*/
-
 	
+	
+	
+	
+
 	return id_game;
 }
+	
+
 	
 	
 	

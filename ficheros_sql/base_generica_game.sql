@@ -28,13 +28,13 @@ CREATE TABLE Relaciona(
 	FOREIGN KEY (Game) REFERENCES Game(ID)
 )AUTO_INCREMENT = 1;
 
-INSERT INTO Player (Username, Password) VALUES ('Jose', '1qaz2wsx');
-INSERT INTO Player (Username, Password) VALUES ('Luiz', '2wsx3edc');
+#INSERT INTO Player (Username, Password) VALUES ('Jose', '1qaz2wsx');
+#INSERT INTO Player (Username, Password) VALUES ('Luiz', '2wsx3edc');
 
-INSERT INTO Game () VALUES ();
+#INSERT INTO Game () VALUES ();
 
-INSERT INTO Relaciona (Game,Player) VALUES (1,'Jose');
-INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
+#INSERT INTO Relaciona (Game,Player) VALUES (1,'Jose');
+#INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
 
 
 

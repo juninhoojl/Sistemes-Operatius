@@ -26,15 +26,18 @@
 // Incrementa um na pontuacao de um deles
 // define vencedor
 // Encerra partida
-
 // Funcao para inserir os jogadores
+
+
 int insere_Player(char nome_arq[], MYSQL *conn);
 
 // Funcao para criar Game inserir usernames do array e retrornar o id do game que estao
 unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd);
 
 // Funcao para alterar pontuacao de um usuario especifico
-int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[]);
+int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[], int alt_score);
+
+
 
 int main(int argc, char **argv){
 	
@@ -78,18 +81,20 @@ int main(int argc, char **argv){
 		printf("Player %d = %s\n",i,players[i]);
 	}
 	
+	altera_Pontuacao(conn, 1, players[0], 10);
 	
-	//insere_Player(PLAYERFILE, conn);
-	
-	//insere_Player(PLAYERFILE, conn);
+	// Descomentar para inserir jugadores
+	// insere_Player(PLAYERFILE, conn);
+
 	qtdp=3;
 	
-	id_jogo=cria_Game(conn, players, qtdp);
+	// Descomentar para criar juego
+	//id_jogo=cria_Game(conn, players, qtdp);
 	printf("IdJogo = %u\n",id_jogo); 
 	
-	for(i=0;i<qtdp;i++){
-		printf("Player %d = %s\n",i,players[i]);
-	}
+/*	for(i=0;i<qtdp;i++){*/
+/*		printf("Player %d = %s\n",i,players[i]);*/
+/*	}*/
 	
 	// Agora ja relaciona jogadores da lista usando id do game
 	mysql_close (conn);
@@ -223,14 +228,69 @@ unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 	return id_game;
 }
 
-	
-int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[]){
-	
 
 	
-// Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
+int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[], int alt_score){
 	
+	// Query para editar 
+	// UPDATE Relaciona SET score=PONTOS WHERE Player=PLAYERNAME AND Game=GAMEID;
+	
+	// Antes consulta os pontos atuais faz a conta com a alteracao
+	
+	int err,i=0;
+	//unsigned int id_game=0;
+	char query[80];
+	char id_games[10];
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	int score=10;
+	char scores[10];
+	
+	
+	strcpy (query, "SELECT Score from Relaciona WHERE Game='");
+	sprintf(id_games, "%u", id_game);
+	strcat (query, id_games);
+	strcat (query, "' AND Player='");
+	strcat (query, player);
+	strcat (query, "';");
+	
+	printf("query = %s\n", query);
+	
+	err = mysql_query(conn, query);
+	
+	if (err!=0){
+		printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+		return 1;
+	}
+	
+	resultado = mysql_store_result(conn);
+	row = mysql_fetch_row(resultado);
+	
+	score = atoi (row[0]);
+	
+	printf("\nSCORE = %d\n",score);
+	
+	score += alt_score;
+	
+	strcpy (query, "UPDATE Relaciona SET score='");
+	sprintf(scores, "%d", score);
+	strcat (query, scores);
+	strcat (query, "' WHERE Player='");
+	strcat (query, player);
+	strcat (query, "' AND Game='");
+	sprintf(id_games, "%d", id_game);
+	strcat (query, id_games);
+	strcat (query, "';");
+	printf("query = %s\n", query);
+	
+	err = mysql_query(conn, query);
+	
+	if (err!=0){
+		printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+		return 1;
+	}
 	
 	
 	return 0;
 }
+	

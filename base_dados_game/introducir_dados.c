@@ -21,8 +21,8 @@
 // Arquivo /media/psf/Home/Documents/Sistemes-Operatius/ficheros_sql
 
 // Insere usuarios OK
-// Cria jogo com usuarios do arquivo game FILE
-// Relaciona eles com o jogo
+// Cria jogo com usuarios do arquivo game FILE OK
+// Relaciona eles com o jogo OK
 // Incrementa um na pontuacao de um deles
 // define vencedor
 // Encerra partida
@@ -30,13 +30,13 @@
 // Funcao para inserir os jogadores
 int insere_Player(char nome_arq[], MYSQL *conn);
 
-//
+// Funcao para criar Game inserir usernames do array e retrornar o id do game que estao
 unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd);
-// Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 
+// Funcao para alterar pontuacao de um usuario especifico
+int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[]);
 
 int main(int argc, char **argv){
-	
 	
 	char players[QTDMAX][TAMUSERNAME] = {"jose", "juninhoojl", "luiz"};
 	
@@ -164,20 +164,12 @@ int insere_Player(char nome_arq[], MYSQL *conn){
 // Recebe pessoas que vao entrar em um jogo
 unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 	
-	//FILE *arq;
 	int err,i=0;
 	unsigned int id_game=0;
-	//char username[25];
-	//char senha[25];
 	char query[80];
 	char id_games[10];
 	MYSQL_RES *resultado;
 	MYSQL_ROW row;
-	
-	//  Cria jogo e pega o ultimo id
-	
-	// INSERT INTO Game () VALUES ();
-	// SELECT LAST_INSERT_ID();
 	
 	// Cria Game
 	strcpy (query, "INSERT INTO Game () VALUES ();");
@@ -188,7 +180,7 @@ unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 		return 1;
 	}
 	
-	// Pega ultimo ID
+	// Seleciona ultimo ID
 	strcpy (query, "SELECT LAST_INSERT_ID();");
 	err = mysql_query(conn, query);
 
@@ -205,28 +197,16 @@ unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 	printf("id_game = %u\n",id_game); 
 	
 	
-	
-	for(i=0;i<qtd;i++){
-		
-		printf("Player %d = %s\n",i,players[i]);
-		
-	}
-	
-	
-	/*
-	
 	for(i=0;i<qtd;i++){
 		
 		//INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
-		
 		printf("id_game = %u\n",id_game);
-		
 		strcpy (query, "INSERT INTO Relaciona (Game,Player) VALUES ('");
 		sprintf(id_games, "%u", id_game);
 		strcat (query, id_games);
 		strcat (query, "','");
 		strcat (query, players[i]);
-		strcat (query, "','");
+		strcat (query, "'");
 		strcat (query, ");");
 		printf("query = %s\n", query);
 		err = mysql_query(conn, query);
@@ -237,25 +217,20 @@ unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd){
 			exit (1); 
 		}
 		
-		
-		
-		
-		//INSERT INTO Relaciona (Game,Player) VALUES (1,'Luiz');
-		
 	}
 	
-	
-	
-	*/
-	
-
+	// Retorna id do Game que foram adicionados
 	return id_game;
 }
+
+	
+int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[]){
 	
 
 	
+// Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 	
 	
 	
-	
-	
+	return 0;
+}

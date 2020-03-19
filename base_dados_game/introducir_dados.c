@@ -30,7 +30,7 @@
 int insere_Player(char *nome_arq[], MYSQL *conn);
 
 //
-cria_Game(MYSQL *conn, char *players[], int qtd);
+unsigned int cria_Game(MYSQL *conn, char *players[], int qtd);
 // Query para editar UPDATE refranero SET fecha="2003-06-01" WHERE ID=1;
 
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv){
 	
 	char players[QTDMAX][TAMUSERNAME+1] = {"jose", "juninhoojl", "luiz"};
 	
-	
+	unsigned int id_jogo=0;
 	
 	int qtdp = 3; 
 	// Ler lista de pessoas para um mesmo jogo
@@ -75,7 +75,8 @@ int main(int argc, char **argv){
 	
 	//insere_Player(PLAYERFILE, conn);
 	
-	cria_Game(conn, players, qtdp);
+	id_jogo=cria_Game(conn, players, qtdp);
+	printf("IdJogo = %u\n",id_jogo); 
 	
 	
 	mysql_close (conn);
@@ -148,23 +149,50 @@ int insere_Player(char *nome_arq[], MYSQL *conn){
 }
 	
 // Recebe pessoas que vao entrar em um jogo
-int cria_Game(MYSQL *conn, char *players[], int qtd){
+unsigned int cria_Game(MYSQL *conn, char *players[], int qtd){
 	
 	//FILE *arq;
 	int err,i=0;
+	unsigned int id_game=0;
 	//char username[25];
 	//char senha[25];
 	char query[80];
 	
-	
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
 	
 	//  Cria jogo e pega o ultimo id
 	
 	// INSERT INTO Game () VALUES ();
-	// LAST_INSERT_ID();
+	// SELECT LAST_INSERT_ID();
+	
+	// Cria Game
+	strcpy (query, "INSERT INTO Game () VALUES ();");
+	err = mysql_query(conn, query);
+	
+	if (err!=0){
+		printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+		return 1;
+	}
+	
+	// Pega ultimo ID
+	strcpy (query, "SELECT LAST_INSERT_ID();");
+	err = mysql_query(conn, query);
 
+	if (err!=0) {
+		printf ("Error al consultar ultimo ID de la base %u %s\n", mysql_errno(conn), mysql_error(conn));
+		exit (1); 
+	}
+	
+	resultado = mysql_store_result(conn);
+	row = mysql_fetch_row(resultado);
+	
+	id_game = atoi (row[0]);
+	
+	printf("id_game = %u\n",id_game); 
 	
 	/*
+
 	for(i=0,i<qtd,i++){
 		
 		err=fscanf(arq,"%s %s", &username[0], &senha[0]);
@@ -202,7 +230,7 @@ int cria_Game(MYSQL *conn, char *players[], int qtd){
 	*/
 
 	
-	return 0;
+	return id_game;
 }
 	
 	

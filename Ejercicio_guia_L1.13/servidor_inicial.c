@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 			// Sendo ele uma altura eh float
 			float altura=atof(p);
 			
-			if(altura > 1.7)){ // Pessoa alta
+			if(altura > 1.7){ // Pessoa alta
 				sprintf(resposta,"%s eh alto/a",strlen(nombre));
 			}else{ // Pessoa baixa
 				sprintf(resposta,"%s eh baixo/a",strlen(nombre));

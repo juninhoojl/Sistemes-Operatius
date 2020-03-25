@@ -38,6 +38,7 @@ namespace WindowsFormsApplication1
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try{
                 server.Connect(ipep);//Intentamos conectar el socket
+                // Se pode conectar bem fica verde
                 this.BackColor = Color.Green;
              
 
@@ -47,10 +48,10 @@ namespace WindowsFormsApplication1
                     // Enviamos al servidor el nombre tecleado
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
-
-                    //Recibimos la respuesta del servidor
+                    
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
+                    // Passaamos de string para vetor de bytes
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                     MessageBox.Show("La longitud de tu nombre es: " + mensaje);
                 }else{
@@ -60,12 +61,13 @@ namespace WindowsFormsApplication1
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
 
-                    //Recibimos la respuesta del servidor
+                    // Recebemos a resposta do servidor
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
+                    // Fazemos isso porque depois vem lixo
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
 
-                    if (mensaje == "SI")
+                    if (mensaje == "SIM")
                         MessageBox.Show("Tu nombre ES bonito.");
                     else
                         MessageBox.Show("Tu nombre NO bonito. Lo siento.");
@@ -88,5 +90,9 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

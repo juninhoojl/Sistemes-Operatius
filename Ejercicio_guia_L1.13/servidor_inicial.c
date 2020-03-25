@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	struct sockaddr_in serv_adr;
 	char peticao[512];
 	char resposta[512];
-
+	
 	
 	// Socket que vai esperar por alguma conexao, de escuta
 	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0){
@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
 	
 	memset(&serv_adr, 0, sizeof(serv_adr));// inicialitza a zero serv_addr
 	serv_adr.sin_family = AF_INET;
-
+	
 	// Estamos escutando de qualquer endereco ip
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	
 	// escucharemos en el port 9050
-	serv_adr.sin_port = htons(9050);
+	serv_adr.sin_port = htons(9090);
 	
 	// Associamos o socket que criamos com porta e tipo de dados
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0){
@@ -84,8 +84,8 @@ int main(int argc, char *argv[])
 		
 		// Determinar o que estao pedindo no servidor
 		if (codigo == 1){ // Servico 1 - Tamanho
-			sprintf(resposta,"%d",strlen(nombre));
-
+			sprintf(resposta,"%d",(int)strlen(nombre));
+			
 		}else if (codigo == 2){ // Servico 2 - Nome bonito ou nao
 			
 			if((nombre[0]=='M') || (nombre[0]=='S')){
@@ -105,9 +105,9 @@ int main(int argc, char *argv[])
 			float altura=atof(p);
 			
 			if(altura > 1.7){ // Pessoa alta
-				sprintf(resposta,"%s eh alto/a",strlen(nombre));
+				sprintf(resposta,"%s eh alto/a",nombre);
 			}else{ // Pessoa baixa
-				sprintf(resposta,"%s eh baixo/a",strlen(nombre));
+				sprintf(resposta,"%s eh baixo/a",nombre);
 			}
 			
 			// Enviamos a resposta

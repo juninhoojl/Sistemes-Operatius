@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
             this.groupBox1.Controls.Add(this.Longitud);
             this.groupBox1.Controls.Add(this.Bonito);
             this.groupBox1.Controls.Add(this.label2);
@@ -78,6 +80,7 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Peticion";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Longitud
             // 

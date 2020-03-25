@@ -38,7 +38,6 @@ unsigned int cria_Game(MYSQL *conn, char players[QTDMAX][TAMUSERNAME], int qtd);
 int altera_Pontuacao(MYSQL *conn, unsigned int id_game, char player[], int alt_score);
 
 
-
 int main(int argc, char **argv){
 	
 	char players[QTDMAX][TAMUSERNAME] = {"jose", "juninhoojl", "luiz"};
@@ -81,15 +80,20 @@ int main(int argc, char **argv){
 		printf("Player %d = %s\n",i,players[i]);
 	}
 	
-	altera_Pontuacao(conn, 1, players[0], 10);
+	
 	
 	// Descomentar para inserir jugadores
-	// insere_Player(PLAYERFILE, conn);
-
+	//insere_Player(PLAYERFILE, conn);
+	
+	//id_jogo=cria_Game(conn, players, qtdp);
+	
+	altera_Pontuacao(conn, 1, players[0], 10);
+	
+	
 	qtdp=3;
 	
 	// Descomentar para criar juego
-	//id_jogo=cria_Game(conn, players, qtdp);
+	//
 	printf("IdJogo = %u\n",id_jogo); 
 	
 /*	for(i=0;i<qtdp;i++){*/

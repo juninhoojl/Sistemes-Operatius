@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 			peticion[ret]='\0';
 			
 			
-			printf ("Peticion: %s\n",peticion);
+			printf ("Peticao: %s\n",peticion);
 			
 			// vamos a ver que quieren
 			char *p = strtok( peticion, "/");
@@ -75,10 +75,9 @@ int main(int argc, char *argv[])
 			if (codigo !=0)
 			{
 				p = strtok( NULL, "/");
-
 				strcpy (nombre, p);
 				// Ya tenemos el nombre
-				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
+				printf ("Codigo: %d, Nome: %s\n", codigo, nombre);
 			}
 			
 			if (codigo ==0) //petici?n de desconexi?n
@@ -88,28 +87,28 @@ int main(int argc, char *argv[])
 			else if (codigo ==2)
 				// quieren saber si el nombre es bonito
 				if((nombre[0]=='M') || (nombre[0]=='S'))
-				strcpy (respuesta,"SI");
+				strcpy (respuesta,"SIM");
 				else
-					strcpy (respuesta,"NO");
+					strcpy (respuesta,"NAO");
 			else //quiere saber si es alto
 			{
 				p = strtok( NULL, "/");
 				float altura =  atof (p);
 				if (altura > 1.70)
-					sprintf (respuesta, "%s: eres alto",nombre);
+					sprintf (respuesta, "%s eh alto",nombre);
 				else
-					sprintf (respuesta, "%s: eresbajo",nombre);
+					sprintf (respuesta, "%s eh baixo",nombre);
 			}
 				
 			if (codigo !=0)
 			{
 				
-				printf ("Respuesta: %s\n", respuesta);
-				// Enviamos respuesta
+				printf ("Resposta: %s\n", respuesta);
+				// Enviamos a resposta
 				write (sock_conn,respuesta, strlen(respuesta));
 			}
 		}
-		// Se acabo el servicio para este cliente
+		// O servico acabou para esse cliente
 		close(sock_conn); 
 	}
 }

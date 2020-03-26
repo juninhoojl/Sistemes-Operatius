@@ -6,10 +6,12 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
+#include "servidor.h"
 
+int main(int argc, char *argv[]){
+	
+	printf("Soma = %d\n",soma(2,3));
 
-int main(int argc, char *argv[])
-{
 	
 	int sock_conn, sock_listen, ret;
 	struct sockaddr_in serv_adr;

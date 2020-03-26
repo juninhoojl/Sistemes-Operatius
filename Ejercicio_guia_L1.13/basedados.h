@@ -21,6 +21,11 @@
 // Pensar em criptografar senhar no futuro
 // #include <openssl/md5.h> 
 
+typedef struct BitVal{
+	
+	unsigned x:1;
+}bitval;
+
 
 
 

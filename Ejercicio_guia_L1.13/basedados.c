@@ -30,7 +30,9 @@ int loga_user(char user[], char senha[], MYSQL *conn);
 
 int existe_user(char user[], MYSQL *conn);
 
-int remove_user(char user[], char senha[], MYSQL *conn);
+int desativa_user(char user[], char senha[], MYSQL *conn);
+
+int ativa_user(char user[], char senha[], MYSQL *conn);
 
 int user_ativo(char user[], MYSQL *conn);
 
@@ -85,12 +87,16 @@ int main(int argc, char **argv){
 	insere_user("juninhos1","1qaz2wsx",conn);
 	
 	
+	insere_user("jose","asdfghjk",conn);
 	loga_user("jose","asdfghjk",conn);
 	
-	remove_user("jose","asdfghjk",conn);
+	desativa_user("jose","asdfghjk",conn);
 	
 
-	user_ativo("juninho1",conn);
+	printf("ATIVO = %d", user_ativo("juninhos1",conn));
+	
+	ativa_user("jose","asdfghjk",conn);
+	
 	
 	
 	// Descomentar para inserir jugadores
@@ -269,33 +275,41 @@ int user_ativo(char user[], MYSQL *conn){
 	int err;
 	MYSQL_RES *resultado;
 	MYSQL_ROW row;
-	
 	char valor;
-	strcpy (query, "SELECT Ativo FROM Player WHERE Username = '");
-	strcat (query, user);
-	strcat (query, "';");
 	
-	err = mysql_query(conn, query);
+	// Somente se existe
 	
-	if (err!=0) {
-		printf ("Error ao consultar usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
-		exit (1); 
+	if(existe_user(user,conn)){
+
+		strcpy (query, "SELECT Ativo FROM Player WHERE Username = '");
+		strcat (query, user);
+		strcat (query, "';");
+		
+		err = mysql_query(conn, query);
+		
+		if (err!=0) {
+			printf ("Error ao consultar usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+			exit (1); 
+		}
+		
+		resultado = mysql_store_result(conn);
+		row = mysql_fetch_row(resultado);
+		
+		
+	}else{
+		//Retorna 2 se nao exite
+		return 2;
 	}
 	
-	resultado = mysql_store_result(conn);
-	row = mysql_fetch_row(resultado);
 	
-	bitval sobre;
-	valor = (char)row[0];
 	
-	printf("STATUS = %c\n",valor);
-
-	return sobre.x;
+	
+	return atoi(row[0]);
 }
 	
+
 	
-	
-int remove_user(char user[], char senha[], MYSQL *conn){
+int desativa_user(char user[], char senha[], MYSQL *conn){
 	
 	char query[80];
 	int err;
@@ -323,6 +337,36 @@ int remove_user(char user[], char senha[], MYSQL *conn){
 
 	return 0;
 }
+	
+int ativa_user(char user[], char senha[], MYSQL *conn){
+	
+	char query[80];
+	int err;
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	
+	// Se pode se autenticar pode se remover
+	
+	if(loga_user(user,senha,conn)){
+		
+		printf("Pode ser ativado\n");
+	}
+	strcpy (query, "UPDATE Player SET Ativo=1 WHERE Username='");
+	strcat (query, user);
+	strcat (query, "';");
+	
+	printf("query = %s\n", query);
+	
+	err = mysql_query(conn, query);
+	
+	if (err!=0){
+		printf ("Error ao ativar usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+		return 1;
+	}
+	
+	return 0;
+}
+
 
 int existe_user(char user[], MYSQL *conn){
 	

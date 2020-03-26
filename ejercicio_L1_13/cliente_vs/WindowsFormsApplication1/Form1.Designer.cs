@@ -41,6 +41,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.username = new System.Windows.Forms.TextBox();
             this.buscar = new System.Windows.Forms.Button();
+            this.insere = new System.Windows.Forms.Button();
+            this.novouser = new System.Windows.Forms.TextBox();
+            this.novasenha = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +101,7 @@
             this.groupBox1.Controls.Add(this.nombre);
             this.groupBox1.Location = new System.Drawing.Point(3, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(300, 202);
+            this.groupBox1.Size = new System.Drawing.Size(387, 202);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Peticion";
@@ -154,7 +159,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(1, 248);
+            this.button3.Location = new System.Drawing.Point(3, 467);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(388, 39);
             this.button3.TabIndex = 10;
@@ -164,7 +169,7 @@
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(12, 318);
+            this.username.Location = new System.Drawing.Point(4, 251);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(271, 20);
             this.username.TabIndex = 11;
@@ -172,19 +177,67 @@
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(290, 318);
+            this.buscar.Location = new System.Drawing.Point(281, 251);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(75, 23);
+            this.buscar.Size = new System.Drawing.Size(108, 23);
             this.buscar.TabIndex = 12;
             this.buscar.Text = "button4";
             this.buscar.UseVisualStyleBackColor = true;
             this.buscar.Click += new System.EventHandler(this.buscar_Click);
             // 
+            // insere
+            // 
+            this.insere.Location = new System.Drawing.Point(257, 296);
+            this.insere.Name = "insere";
+            this.insere.Size = new System.Drawing.Size(56, 47);
+            this.insere.TabIndex = 13;
+            this.insere.Text = "Insere";
+            this.insere.UseVisualStyleBackColor = true;
+            this.insere.Click += new System.EventHandler(this.insere_Click);
+            // 
+            // novouser
+            // 
+            this.novouser.Location = new System.Drawing.Point(73, 296);
+            this.novouser.Name = "novouser";
+            this.novouser.Size = new System.Drawing.Size(178, 20);
+            this.novouser.TabIndex = 14;
+            // 
+            // novasenha
+            // 
+            this.novasenha.Location = new System.Drawing.Point(73, 323);
+            this.novasenha.Name = "novasenha";
+            this.novasenha.Size = new System.Drawing.Size(178, 20);
+            this.novasenha.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 299);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Username";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 326);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Password";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 509);
+            this.ClientSize = new System.Drawing.Size(644, 509);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.novasenha);
+            this.Controls.Add(this.novouser);
+            this.Controls.Add(this.insere);
             this.Controls.Add(this.buscar);
             this.Controls.Add(this.username);
             this.Controls.Add(this.button3);
@@ -215,6 +268,11 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.Button buscar;
+        private System.Windows.Forms.Button insere;
+        private System.Windows.Forms.TextBox novouser;
+        private System.Windows.Forms.TextBox novasenha;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
     }
 }
 

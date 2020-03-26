@@ -213,9 +213,7 @@ int main(int argc, char *argv[]){
 				}else{
 					sprintf (respuesta, "%s eh baixo",nombre);
 				}
-			}else{// Busca usuario
-				
-				;
+			}else if (codigo==4){// Busca usuario
 				
 				if (existe_user(nombre,conn) == 1){
 					sprintf (respuesta, "%s existe",nombre);
@@ -224,6 +222,26 @@ int main(int argc, char *argv[]){
 				}
 				
 				
+			}else{ // insere USUARIO
+				
+				char senha[20];
+				p = strtok( NULL, "/");
+				int situacao=0;
+				strcpy (senha, p);
+				
+				situacao=insere_user(nombre,senha,conn);
+				
+				if (situacao == 0){
+					sprintf (respuesta, "%s inserido com sucesso",nombre);
+				}else if (situacao == 1){
+					sprintf (respuesta, "%s ja existe",nombre);
+				}else{
+					sprintf (respuesta, "%s nao pode ser inserido",nombre);
+				}
+				
+				
+				// Ya tenemos el c?digo de la petici?n
+
 			}
 			
 			if(codigo !=0){ // Desconectar
@@ -330,7 +348,7 @@ int insere_user(char user[], char senha[], MYSQL *conn){
 		
 		if (err!=0){
 			printf ("Error ao introduzir dados na base %u %s\n", mysql_errno(conn), mysql_error(conn));
-			return 1;
+			return 2;
 		}else{
 			
 			printf("Usuario inserido com sucesso\n");

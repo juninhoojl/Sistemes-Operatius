@@ -1,5 +1,5 @@
-//#ifndef basedados_h
-//#define basedados_h
+#ifndef basedados_h
+#define basedados_h
 
 #include <stdio.h>
 #include <mysql.h>
@@ -29,4 +29,4 @@ typedef struct BitVal{
 
 
 
-//#endif
+#endif

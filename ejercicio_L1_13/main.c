@@ -151,11 +151,7 @@ int main(int argc, char *argv[]){
 	/*	}*/
 	
 	// Agora ja relaciona jogadores da lista usando id do game
-	
-	
-	
-	
-	
+
 	
 	// Laco infinito
 	for (;;){
@@ -208,14 +204,26 @@ int main(int argc, char *argv[]){
 				}else{
 					strcpy (respuesta,"NAO");
 				}
-			}else{ //quiere saber si es alto
+			}else if (codigo==3){ //quiere saber si es alto
 			
 				p = strtok( NULL, "/");
 				float altura =  atof (p);
-				if (altura > 1.70)
+				if (altura > 1.70){
 					sprintf (respuesta, "%s eh alto",nombre);
-				else
+				}else{
 					sprintf (respuesta, "%s eh baixo",nombre);
+				}
+			}else{// Busca usuario
+				
+				;
+				
+				if (existe_user(nombre,conn) == 1){
+					sprintf (respuesta, "%s existe",nombre);
+				}else{
+					sprintf (respuesta, "%s nao existe",nombre);
+				}
+				
+				
 			}
 			
 			if(codigo !=0){ // Desconectar

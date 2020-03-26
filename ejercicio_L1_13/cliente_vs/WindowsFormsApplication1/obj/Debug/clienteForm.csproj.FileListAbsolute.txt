@@ -96,3 +96,11 @@ Y:\Documents\Sistemes-Operatius\Ejercicio_guia_L1.13\cliente_con_conexion_descon
 Y:\Documents\Sistemes-Operatius\Ejercicio_guia_L1.13\cliente_con_conexion_desconexion\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.GenerateResource.cache
 Y:\Documents\Sistemes-Operatius\Ejercicio_guia_L1.13\cliente_con_conexion_desconexion\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 Y:\Documents\Sistemes-Operatius\Ejercicio_guia_L1.13\cliente_con_conexion_desconexion\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\clienteForm.csprojAssemblyReference.cache
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.GenerateResource.cache
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb

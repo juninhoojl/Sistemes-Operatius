@@ -39,6 +39,8 @@
             this.alturaBox = new System.Windows.Forms.TextBox();
             this.Bonito = new System.Windows.Forms.RadioButton();
             this.button3 = new System.Windows.Forms.Button();
+            this.username = new System.Windows.Forms.TextBox();
+            this.buscar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +48,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 25);
+            this.label2.Location = new System.Drawing.Point(9, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 25);
             this.label2.TabIndex = 1;
@@ -58,6 +60,7 @@
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(164, 20);
             this.nombre.TabIndex = 3;
+            this.nombre.TextChanged += new System.EventHandler(this.nombre_TextChanged);
             // 
             // button1
             // 
@@ -93,10 +96,11 @@
             this.groupBox1.Controls.Add(this.nombre);
             this.groupBox1.Location = new System.Drawing.Point(3, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(386, 202);
+            this.groupBox1.Size = new System.Drawing.Size(300, 202);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Peticion";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Longitud
             // 
@@ -131,7 +135,7 @@
             // 
             // alturaBox
             // 
-            this.alturaBox.Location = new System.Drawing.Point(15, 110);
+            this.alturaBox.Location = new System.Drawing.Point(22, 116);
             this.alturaBox.Name = "alturaBox";
             this.alturaBox.Size = new System.Drawing.Size(62, 20);
             this.alturaBox.TabIndex = 9;
@@ -158,11 +162,31 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // username
+            // 
+            this.username.Location = new System.Drawing.Point(12, 318);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(271, 20);
+            this.username.TabIndex = 11;
+            this.username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // buscar
+            // 
+            this.buscar.Location = new System.Drawing.Point(290, 318);
+            this.buscar.Name = "buscar";
+            this.buscar.Size = new System.Drawing.Size(75, 23);
+            this.buscar.TabIndex = 12;
+            this.buscar.Text = "button4";
+            this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.buscar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 290);
+            this.ClientSize = new System.Drawing.Size(393, 509);
+            this.Controls.Add(this.buscar);
+            this.Controls.Add(this.username);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
@@ -172,6 +196,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -188,6 +213,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox alturaBox;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.Button buscar;
     }
 }
 

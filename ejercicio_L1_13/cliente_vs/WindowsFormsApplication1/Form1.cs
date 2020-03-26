@@ -42,8 +42,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Conectado");
 
             }
-            catch (SocketException ex)
-            {
+            catch (SocketException){
                 //Si hay excepcion imprimimos error y salimos del programa con return 
                 MessageBox.Show("No he podido conectar con el servidor");
                 return;
@@ -119,6 +118,36 @@ namespace WindowsFormsApplication1
 
         }
 
-     
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buscar_Click(object sender, EventArgs e){
+
+            string mensaje = "4/" + username.Text;
+            // Enviamos al servidor el nombre tecleado
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+
+            //Recibimos la respuesta del servidor
+            byte[] msg2 = new byte[80];
+            server.Receive(msg2);
+            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+
+            MessageBox.Show(mensaje);
+
+
+        }
+
+        private void nombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

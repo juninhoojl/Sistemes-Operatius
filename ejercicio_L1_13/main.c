@@ -44,6 +44,7 @@ int ativa_user(char user[], char senha[], MYSQL *conn);
 int user_ativo(char user[], MYSQL *conn);
 
 
+int logado = 0; // 0 = nao
 
 int main(int argc, char *argv[]){
 
@@ -123,7 +124,6 @@ int main(int argc, char *argv[]){
 	
 	insere_user("juninhos1","1qaz2wsx",conn);
 	
-	
 	insere_user("jose","asdfghjk",conn);
 	loga_user("jose","asdfghjk",conn);
 	
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]){
 
 		int terminar =0;
 		// Atender esse cliente ate que se desconecte
-		
+		int situacao = 0;
 		while (terminar ==0)
 		{
 			// Ahora recibimos la petici?n
@@ -216,17 +216,23 @@ int main(int argc, char *argv[]){
 			}else if (codigo==4){// Busca usuario
 				
 				if (existe_user(nombre,conn) == 1){
-					sprintf (respuesta, "%s existe",nombre);
+					
+					if(user_ativo(nombre,conn) == 1){
+						sprintf (respuesta, "%s existe",nombre);
+						
+					}else{
+						sprintf (respuesta, "%s existe (mas esta desativado)",nombre);
+					}
+					
 				}else{
 					sprintf (respuesta, "%s nao existe",nombre);
 				}
 				
 				
-			}else{ // insere USUARIO
+			}else if (codigo==5){ // insere USUARIO
 				
 				char senha[20];
 				p = strtok( NULL, "/");
-				int situacao=0;
 				strcpy (senha, p);
 				
 				situacao=insere_user(nombre,senha,conn);
@@ -239,9 +245,42 @@ int main(int argc, char *argv[]){
 					sprintf (respuesta, "%s nao pode ser inserido",nombre);
 				}
 				
+			}else if (codigo==6){ // remove USUARIO
 				
-				// Ya tenemos el c?digo de la petici?n
-
+				char senha[20];
+				p = strtok( NULL, "/");
+				int situacao=0;
+				strcpy (senha, p);
+				
+				situacao = desativa_user(nombre,senha,conn);
+				
+				if (situacao == 0){
+					sprintf (respuesta, "%s desativado com sucesso",nombre);
+				}else if (situacao == 2){
+					sprintf (respuesta, "%s nao pode ser desativado",nombre);
+				}else{
+					sprintf (respuesta, "Erro ao desativar %s",nombre);
+				}
+				
+				
+			}else if (codigo==7){ // recupera USUARIO
+				
+				char senha[20];
+				p = strtok( NULL, "/");
+				int situacao=0;
+				strcpy (senha, p);
+				
+				situacao = ativa_user(nombre,senha,conn);
+				
+				if (situacao == 0){
+					sprintf (respuesta, "%s ativado com sucesso",nombre);
+				}else if (situacao == 2){
+					sprintf (respuesta, "%s nao pode ser reativado",nombre);
+				}else{
+					sprintf (respuesta, "Erro ao reativar %s",nombre);
+				}
+				
+				
 			}
 			
 			if(codigo !=0){ // Desconectar
@@ -440,8 +479,6 @@ int user_ativo(char user[], MYSQL *conn){
 	}
 	
 	
-	
-	
 	return atoi(row[0]);
 }
 	
@@ -459,20 +496,28 @@ int desativa_user(char user[], char senha[], MYSQL *conn){
 	if(loga_user(user,senha,conn)){
 		
 		printf("Pode ser deletado\n");
+		
+		strcpy (query, "UPDATE Player SET Ativo=0 WHERE Username='");
+		strcat (query, user);
+		strcat (query, "';");
+		
+		printf("query = %s\n", query);
+		
+		err = mysql_query(conn, query);
+		
+		if (err!=0){
+			printf ("Error ao remover usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+			return 1;
+		}
+		
+	}else{
+		
+		printf("Nao pode ser deletado");
+		// Nao pode 
+		return 2;
 	}
-	strcpy (query, "UPDATE Player SET Ativo=0 WHERE Username='");
-	strcat (query, user);
-	strcat (query, "';");
 	
-	printf("query = %s\n", query);
 	
-	err = mysql_query(conn, query);
-	
-	if (err!=0){
-		printf ("Error ao remover usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
-		return 1;
-	}
-
 	return 0;
 }
 	
@@ -487,20 +532,28 @@ int ativa_user(char user[], char senha[], MYSQL *conn){
 	
 	if(loga_user(user,senha,conn)){
 		
-		printf("Pode ser ativado\n");
+		printf("Pode ser reativad\n");
+		
+		strcpy (query, "UPDATE Player SET Ativo=1 WHERE Username='");
+		strcat (query, user);
+		strcat (query, "';");
+		
+		printf("query = %s\n", query);
+		
+		err = mysql_query(conn, query);
+		
+		if (err!=0){
+			printf ("Error ao reativar usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
+			return 1;
+		}
+		
+	}else{
+		
+		printf("Nao pode ser reativado");
+		// Nao pode 
+		return 2;
 	}
-	strcpy (query, "UPDATE Player SET Ativo=1 WHERE Username='");
-	strcat (query, user);
-	strcat (query, "';");
 	
-	printf("query = %s\n", query);
-	
-	err = mysql_query(conn, query);
-	
-	if (err!=0){
-		printf ("Error ao ativar usuario na base %u %s\n", mysql_errno(conn), mysql_error(conn));
-		return 1;
-	}
 	
 	return 0;
 }

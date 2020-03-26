@@ -104,3 +104,7 @@ Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplicati
 Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.manifest
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.application
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe.manifest
+Y:\Documents\Sistemes-Operatius\ejercicio_L1_13\cliente_vs\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.application

@@ -7,12 +7,12 @@
 #include <stdio.h>
 
 #include "servidor.h"
+#include "basedados.h"
 
 int main(int argc, char *argv[]){
 	
 	printf("Soma = %d\n",soma(2,3));
 
-	
 	int sock_conn, sock_listen, ret;
 	struct sockaddr_in serv_adr;
 	char peticion[512];

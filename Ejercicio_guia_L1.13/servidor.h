@@ -1,6 +1,3 @@
-
-
-
 #ifndef servidor_h
 #define servidor_h
 

@@ -152,7 +152,7 @@ int main(int argc, char *argv[]){
 	/*	}*/
 	
 	// Agora ja relaciona jogadores da lista usando id do game
-	mysql_close (conn);
+	
 	
 	
 	
@@ -228,6 +228,7 @@ int main(int argc, char *argv[]){
 		}
 		// O servico acabou para esse cliente
 		close(sock_conn); 
+		mysql_close (conn);
 	}
 }
 

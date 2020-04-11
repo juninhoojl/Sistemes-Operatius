@@ -292,7 +292,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 		// O servico acabou para esse cliente
-		close(sock_conn); 
+		close(sock_conn);
 		mysql_close (conn);
 	}
 }

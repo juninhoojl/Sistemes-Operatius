@@ -161,7 +161,7 @@ namespace WindowsFormsApplication1
 
                 string mensaje = "5/" + nomeuser.Text + "/" + senhauser.Text;
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
+                //server.Send(msg);
 
                 //Recibimos la respuesta del servidor
                 byte[] msg2 = new byte[80];
